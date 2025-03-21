@@ -1,4 +1,7 @@
-﻿namespace C_ApplicationQuiz
+﻿using System.ComponentModel.Design;
+using System.Numerics;
+
+namespace C_ApplicationQuiz
 {
     internal class Program
     {
@@ -90,9 +93,70 @@
         }
 
         #endregion
+
+        #region FindClosestNumber
+        
+        // 주어진 배열에서 주어진 숫자와 가장 가까운 수를 구하는 함수를 작성하시오.
+
+        // 입력 : { 3, 10, 28 }, 20
+        // 출력 : 28
+
+        // 입력 : { 10, 11, 12 }, 15
+        // 출력 : 12
+
+        // 입력 : { 1, 2, 3, 4, 5 }, 3
+        // 출력 : 3
+
+        public static int FindClosestNumber(int[] array, int number)
+        {
+            int answer = number - array[0];
+            int comparison = 0;
+            if (answer < 0)
+            {
+                answer = -answer;
+            }
+
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (number - array[i] < 0)
+                {
+                    comparison = array[i] - number;
+                }
+                else
+                {
+                    comparison = number - array[i];
+                }
+
+                if (answer > comparison)
+                {
+                    answer = comparison;
+                }
+            }
+            for(int i = 0; i < array.Length; i++)
+            {
+                if (answer == 0)
+                {
+                    answer = number;
+                    break;
+                }
+                else if(array[i] == number + comparison)
+                {
+                    answer = number + comparison;
+                }
+                else if (array[i] == number - comparison)
+                {
+                    answer = number - comparison;
+                }                
+            }
+            return answer;
+        }
+
+        #endregion
+
         static void Main(string[] args)
         {
-            Console.WriteLine(SumOfDigits(12345));
+            int[] array = new int[] { 10, 11, 12 };
+            Console.WriteLine(FindClosestNumber(array, 15));
         }
     }
 }
