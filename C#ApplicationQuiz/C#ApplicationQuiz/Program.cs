@@ -24,9 +24,36 @@
             return -1;
         }
 
+        // 주어진 숫자가 소수인지 판별하는 함수를 작성하시오.
+
+        // 입력 : 7
+        // 출력 : true
+
+        // 입력 : 4
+        // 출력 : false
+
+        // 입력 : 1
+        // 출력 : false
+        public static bool IsPrime(int number)
+        {
+            if (number == 1)
+            {
+                return false;
+            }
+
+            for (int i = 2; i < number; i++)
+            {
+                if (number % i == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         static void Main(string[] args)
         {
-            Console.WriteLine(FindKeyIndex("abcdef", 'd'));
+            Console.WriteLine(IsPrime(29));
         }
     }
 }
