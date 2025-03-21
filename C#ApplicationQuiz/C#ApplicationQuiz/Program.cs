@@ -2,6 +2,8 @@
 {
     internal class Program
     {
+        #region FindKeyIndex
+
         // 주어진 문자열 중 문자가 있는 인덱스를 구하는 함수를 작성하시오. 단 없을 경우 -1을 출력하시오.
 
         // 입력 : "abcdef", 'd'
@@ -23,6 +25,10 @@
             }
             return -1;
         }
+
+        #endregion
+
+        #region IsPrime
 
         // 주어진 숫자가 소수인지 판별하는 함수를 작성하시오.
 
@@ -51,9 +57,42 @@
             return true;
         }
 
+        #endregion
+
+        #region SumOfDigits
+        
+        // 주어진 숫자의 각 자리수의 합을 구하는 함수를 작성하시오
+
+        // 입력 : 18234
+        // 출력 : 18
+
+        // 입력 : 3849
+        // 출력 : 24
+
+        // 입력 : 12345
+        // 출력 : 15
+
+        public static int SumOfDigits(int number)
+        {
+            int sum = 0;
+            while(true)
+            {
+                sum += number % 10;
+                number /= 10;
+                if (number / 10 == 0)
+                {
+                    sum += number % 10;
+                    break;
+                }
+                    
+            }
+            return sum;
+        }
+
+        #endregion
         static void Main(string[] args)
         {
-            Console.WriteLine(IsPrime(29));
+            Console.WriteLine(SumOfDigits(12345));
         }
     }
 }
