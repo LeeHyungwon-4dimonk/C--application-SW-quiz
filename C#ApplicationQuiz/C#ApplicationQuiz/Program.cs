@@ -153,10 +153,70 @@ namespace C_ApplicationQuiz
 
         #endregion
 
+        #region FindModeNumber
+
+        // 주어진 배열에서 가장 자주 나오는 값인 최빈값을 구하는 함수를 작성하시오.
+        // 단, 최빈값이 여러 개인 경우 가장 값이 작은 값을 구한다.
+
+        // 입력 : { 1, 2, 3, 3, 3, 4 }
+        // 출력 : 3
+
+        // 입력 : { 1, 99, 99, 55, 32, 14 }
+        // 출력 : 99
+
+        // 입력 : { 11 }
+        // 출력 : 11
+
+        public static int FindModeNumber(int[] array)
+        {
+            // 개수를 세는 Count 배열을 새로 생성
+            int[] Count = new int[array.Length];
+            int maxCount = 0;   // Count 중 가장 큰 수
+            int answer = 0;     // return 할 최종 최빈값의 실제 수
+
+            // 1. array 배열의 각 수의 중복 여부를 Count
+            for (int i = 0; i < array.Length; i++)   
+            {
+                int findNum = array[i];
+                for(int j = 0; j < array.Length; j++)
+                {
+                    if(findNum == array[j])
+                    {
+                        Count[i]++;
+                    }
+                }
+            }
+
+            // 2. Count 배열에서 가장 큰 수를 찾고, answer에 최빈값의 실제 수를 대입
+            for (int i = 0; i < Count.Length; i++)   
+            {
+                if(maxCount < Count[i])
+                {
+                    maxCount = Count[i];
+                    answer = array[i];
+                }
+            }
+
+            // 3. 최빈값이 개수가 여러 개일 경우, answer와 비교하여 제일 작은 수를 반영
+            for(int i = 0; i < Count.Length; i++)
+            {
+                if (maxCount == Count[i])   // 앞의 for문에서는 같은 수의 경우 maxCount 반영이 안되었다.
+                {
+                    if(answer > array[i])   // 처음의 최빈값이 비교하는 최빈값이 수보다 클 경우
+                    {
+                        answer = array[i];  // 작은 최빈값 수를 최종 최빈값 수로 반영
+                    }
+                }
+            }
+            return answer;
+        }
+
+        #endregion
+
         static void Main(string[] args)
         {
-            int[] array = new int[] { 10, 11, 12 };
-            Console.WriteLine(FindClosestNumber(array, 15));
+            int[] array = new int[] { 1, 1, 2, 3, 4, 5, 6, 7, 7, 9, 9 };
+            Console.WriteLine(FindModeNumber(array));
         }
     }
 }
